@@ -1,0 +1,6 @@
+{
+    "require": {
+        "smalot/pdfparser": "^2.0",
+        "tonchik-tm/pdf-to-html": "~1"
+    }
+}

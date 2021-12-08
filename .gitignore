@@ -1,0 +1,7 @@
+/vendor
+/data
+/node_modules
+/poppler*
+*.zip
+*.exe
+*.pdf
