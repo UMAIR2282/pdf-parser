@@ -3,7 +3,7 @@ const pdf = require('pdf-parse');
 const pdftohtml = require('pdftohtmljs');
 const { pipeline } = require('stream');
 const puppeteer = require('puppeteer');
-const url = `${__dirname}\\sampleoutput.html`;
+const url = `${__dirname}\\sampleoutputblank.html`;
 const parseInformationFromPDFData = require("./parser/parseInformationFromPDFData");
 
 const launchPuppeteer = async () => {
@@ -29,12 +29,8 @@ const launchPuppeteer = async () => {
         });
         return results;
     })
-    for(let i = 0; i < data.length; i++)
-    {
-      console.log(i + 1, data[i])
-    }
     browser.close();
-    //parseInformationFromPDFData(data);
+    parseInformationFromPDFData(data);
 }
 
 launchPuppeteer();
