@@ -1,24 +1,34 @@
 const getNextClass = require("./getNextClass");
 const StringHelper = require("./stringHelper");
 
-const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, parentClass)
+const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, parentClass, secondHighest = null, thirdHighest = null, fourthHighest = null)
 {
-    let secondHighest = getNextClass(currentClass, 1);
-    let thirdHighest = getNextClass(currentClass, 2);
-    let fourthHighest = getNextClass(currentClass, 3);
+    if(secondHighest == null)
+    {
+        secondHighest = getNextClass(currentClass, 1);
+    }
+    if(thirdHighest == null)
+    {
+        thirdHighest = getNextClass(currentClass, 2);
+    }
+    if(fourthHighest == null)
+    {
+        fourthHighest = getNextClass(currentClass, 3);
+    }
     let i = idx;
     for(i = idx; i < data.length; i++)
     {
         let d = data[i];
+        let dClasses = Object.values(d.classes);
         if(d.value == undefined || d.value == null || d.value.trim().length <= 0)
         {
             continue;
         }
-        else if(d.currentClass == parentClass)
+        else if(d.currentClass == parentClass || dClasses.indexOf(parentClass) >= 0)
         {
             break;
         }
-        if(d.currentClass == currentClass)
+        if(d.currentClass == currentClass || d.classes.indexOf(currentClass) >= 0)
         {
             let columnName = StringHelper.replaceAll(d.value, ' ', '');
             let label = d.value;
@@ -26,6 +36,7 @@ const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, pare
             for(i = i + 1; i < data.length; i++)
             {
                 let c = data[i];
+                let classes = Object.values(c.classes);
                 if(c.value == undefined || c.value == null || c.value.trim().length <= 0)
                 {
                     continue;
@@ -34,7 +45,9 @@ const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, pare
                 {
                     break;
                 }
-                if(c.currentClass == secondHighest || c.currentClass == thirdHighest || c.currentClass == fourthHighest)
+                if((c.currentClass == secondHighest || c.currentClass == thirdHighest || c.currentClass == fourthHighest)
+                   || (classes.indexOf(secondHighest) >= 0 || classes.indexOf(thirdHighest) >= 0 || classes.indexOf(fourthHighest) >= 0)
+                )
                 {
                     values.push(c.value);
                 }
