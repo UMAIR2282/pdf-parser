@@ -16,6 +16,7 @@ const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, pare
         fourthHighest = getNextClass(currentClass, 3);
     }
     let i = idx;
+    let foundParentClass = false;
     for(i = idx; i < data.length; i++)
     {
         let d = data[i];
@@ -24,8 +25,9 @@ const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, pare
         {
             continue;
         }
-        else if(d.currentClass == parentClass || dClasses.indexOf(parentClass) >= 0)
+        else if(d.currentClass == 'h3' || d.currentClass == parentClass || dClasses.indexOf(parentClass) >= 0)
         {
+            foundParentClass = true;
             break;
         }
         if(d.currentClass == currentClass || d.classes.indexOf(currentClass) >= 0)
@@ -41,7 +43,7 @@ const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, pare
                 {
                     continue;
                 }
-                if(c.currentClass == currentClass || c.currentClass == parentClass)
+                if(c.currentClass == 'h3' || c.currentClass == currentClass || c.currentClass == parentClass)
                 {
                     break;
                 }
@@ -75,7 +77,7 @@ const getDataAgainstClasses = function(data, idx, returnInfo, currentClass, pare
             }
         }
     }
-    if(i > (idx + 1))
+    if(i > (idx + 1) && !foundParentClass)
     {
         i = i - 1;
     }

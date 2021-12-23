@@ -35,6 +35,10 @@ const getSectionInfo = function(data, sectionName, subClass = "h5"){
                 if(d.currentClass == subClass)
                 {
                     i = getDataAgainstClasses(data, i, sectionInfo, d.currentClass, highestClass);
+                    if(highestClass != null && data[i].currentClass == highestClass)
+                    {
+                        break;
+                    }
                 }
             }
             else
