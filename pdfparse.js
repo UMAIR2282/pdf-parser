@@ -1,9 +1,9 @@
-const fs = require('fs');
-const pdf = require('pdf-parse');
+//const fs = require('fs');
+//const pdf = require('pdf-parse');
 const pdftohtml = require('pdftohtmljs');
-const { pipeline } = require('stream');
+//const { pipeline } = require('stream');
 const puppeteer = require('puppeteer');
-const url = `${__dirname}\\sampleoutput.html`;
+const url = `${__dirname}\\sampleoutputcreditreport.html`;
 const parseInformationFromPDFData = require("./parser/parseInformationFromPDFData");
 
 const launchPuppeteer = async () => {
@@ -33,8 +33,7 @@ const launchPuppeteer = async () => {
     parseInformationFromPDFData(data);
 }
 
-launchPuppeteer();
-return;
+//launchPuppeteer();
  
 /*let dataBuffer = fs.readFileSync('./score.pdf');
  
@@ -84,6 +83,6 @@ const convert = async (file, output, preset) => {
 }
 
 // call method
-convert('ScoreSenseBlank.pdf', 'sampleoutputblank.html')
+convert('ScoreSenseCreditReport.pdf', 'sampleoutputcreditreport.html')
 
 
